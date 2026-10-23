@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Overdrive Garage | Offroad parts and accessories</title>
+<meta name="description" content="Overdrive Garage: precision parts for peak performance. Offroad lift kits, armour, winches, lighting and recovery gear.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;700&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+<style>
+:root{--ink:#171717;--ink2:#222;--slate:#64748B;--slate-l:#94a3b8;--paper:#fff;--soft:#f4f5f7;--line:rgba(100,116,139,.3);--r:6px}
+html{scroll-behavior:smooth;scroll-padding-top:70px}
+body{font-family:Manrope,sans-serif;color:var(--ink);background:var(--paper);overflow-x:hidden}
+h1,h2,h3,h4,.brand{font-family:'Space Grotesk',sans-serif;letter-spacing:-.02em}
+a{color:inherit}
+section{padding:96px 0;position:relative;overflow:hidden}
+.dark{background:var(--ink);color:#f1f5f9}
+.dark .muted{color:var(--slate-l)}
+.muted{color:var(--slate)}
+.btn-od{background:var(--ink);color:#fff;border:1px solid var(--ink);border-radius:var(--r);padding:.8rem 1.6rem;font-weight:700;transition:.25s}
+.btn-od:hover{background:var(--slate);border-color:var(--slate);color:#fff;transform:translateY(-2px)}
+.dark .btn-od,.btn-light-od{background:#fff;color:var(--ink);border-color:#fff}
+.dark .btn-od:hover,.btn-light-od:hover{background:var(--slate-l);border-color:var(--slate-l);color:var(--ink)}
+.btn-ghost{border:1px solid var(--slate);color:#fff;border-radius:var(--r);padding:.8rem 1.6rem;font-weight:700;transition:.25s;text-decoration:none}
+.btn-ghost:hover{background:#fff;color:var(--ink)}
+:focus-visible{outline:2px solid var(--slate-l);outline-offset:3px}
+
+/* preloader */
+#pre{position:fixed;inset:0;background:var(--ink);z-index:9999;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1.2rem;transition:opacity .6s,visibility .6s}
+#pre.done{opacity:0;visibility:hidden}
+.gauge{width:84px;height:84px;border-radius:50%;border:3px solid #2c2c2c;border-top-color:#fff;animation:spin 1s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+#pre small{color:var(--slate-l);font-family:'Space Grotesk';letter-spacing:.15em}
+
+/* cursor */
+.cur,.cur-dot{position:fixed;top:0;left:0;pointer-events:none;z-index:9998;border-radius:50%;opacity:0;transition:opacity .3s}
+.cur{width:36px;height:36px;border:1.5px solid #fff;mix-blend-mode:difference;transition:width .25s,height .25s,opacity .3s}
+.cur-dot{width:6px;height:6px;background:#fff;mix-blend-mode:difference}
+.cur.big{width:64px;height:64px}
+@media(hover:none){.cur,.cur-dot{display:none}}
+@media(hover:hover){body.cc,body.cc a,body.cc button{cursor:none}}
+
+/* nav */
+.navbar{background:rgba(23,23,23,.82);backdrop-filter:blur(14px);border-bottom:1px solid var(--line);padding:.8rem 0;transition:padding .3s}
+.navbar.shrink{padding:.4rem 0}
+.brand{font-weight:700;font-size:1.3rem;color:#fff;text-decoration:none}
+.brand i{font-style:normal;color:var(--slate-l)}
+.nav-link{color:#cbd5e1!important;font-weight:500;position:relative}
+.nav-link::after{content:"";position:absolute;left:.5rem;right:.5rem;bottom:2px;height:1px;background:#fff;transform:scaleX(0);transition:.3s;transform-origin:left}
+.nav-link:hover::after,.nav-link.active::after{transform:scaleX(1)}
+.nav-link:hover,.nav-link.active{color:#fff!important}
+.navbar-toggler{border-color:var(--line)}
+.navbar-toggler-icon{filter:invert(1)}
+.cart-btn{background:none;border:1px solid var(--line);color:#fff;border-radius:var(--r);padding:.4rem .9rem;font-weight:700}
+.cart-btn span{background:#fff;color:var(--ink);border-radius:20px;padding:0 .5rem;margin-left:.4rem;font-size:.8rem}
+
+/* hero */
+#hero{min-height:100vh;display:flex;align-items:center;padding:120px 0 80px;background:var(--ink);color:#fff}
+#heroCanvas{position:absolute;inset:0;width:100%;height:100%}
+#hero .container{position:relative;z-index:2}
+#hero h1{font-size:clamp(2.6rem,7vw,5.6rem);line-height:1;font-weight:700;max-width:12ch}
+#hero p{max-width:46ch;color:var(--slate-l);font-size:1.15rem}
+.rev{display:flex;gap:6px;margin-top:3rem}
+.rev b{width:34px;height:6px;background:#2c2c2c;border-radius:3px;transition:background .2s}
+.rev b.on{background:#fff}
+
+/* stats */
+.stat h3{font-size:clamp(2.2rem,5vw,3.4rem);margin:0}
+.stat{border-left:1px solid var(--line);padding-left:1.2rem}
+
+/* products */
+.prod{border:1px solid #e2e5ea;border-radius:var(--r);overflow:hidden;background:#fff;transition:.3s;height:100%;display:flex;flex-direction:column}
+.prod:hover{transform:translateY(-6px);box-shadow:0 18px 36px -18px rgba(23,23,23,.45)}
+.prod .ph{overflow:hidden;aspect-ratio:4/3;background:var(--soft)}
+.prod img{width:100%;height:100%;object-fit:cover;filter:grayscale(1);transition:.5s}
+.prod:hover img{transform:scale(1.07);filter:grayscale(.2)}
+.prod .bd{padding:1.2rem;display:flex;flex-direction:column;flex:1}
+.prod .tag{font-size:.8rem;color:var(--slate)}
+.prod .pr{font-family:'Space Grotesk';font-weight:700;font-size:1.25rem}
+.filter .btn{border-radius:20px;border:1px solid var(--line);color:var(--ink);font-weight:500;margin:0 .2rem .5rem 0}
+.filter .btn.on,.filter .btn:hover{background:var(--ink);color:#fff}
+
+/* alternating */
+.alt .frame{position:relative;border-radius:var(--r);overflow:hidden}
+.alt img{width:100%;display:block;filter:grayscale(1) contrast(1.05)}
+.alt .depth{position:absolute;width:55%;aspect-ratio:1;border:1px solid var(--slate);border-radius:var(--r);z-index:0}
+.alt .depth.r{right:-6%;bottom:-8%}.alt .depth.l{left:-6%;bottom:-8%}
+.alt .frame-wrap{position:relative}
+.alt .frame{z-index:1}
+.chk{list-style:none;padding:0}
+.chk li{padding:.45rem 0 .45rem 1.8rem;position:relative}
+.chk li::before{content:"";position:absolute;left:0;top:.95rem;width:12px;height:2px;background:var(--slate)}
+
+/* gallery */
+.gal{position:relative;overflow:hidden;border-radius:var(--r);display:block;aspect-ratio:1;border:0;padding:0;width:100%;background:#000}
+.gal img{width:100%;height:100%;object-fit:cover;filter:grayscale(1);transition:.5s;opacity:.85}
+.gal:hover img{transform:scale(1.08);opacity:1}
+.gal::after{content:"View";position:absolute;inset:auto 0 0 0;padding:.6rem;color:#fff;background:linear-gradient(transparent,rgba(0,0,0,.8));transform:translateY(100%);transition:.3s;text-align:left;font-weight:700}
+.gal:hover::after{transform:none}
+#lbImg{max-height:80vh;object-fit:contain}
+.modal-content{background:var(--ink);color:#fff;border:1px solid var(--line)}
+
+/* testimonials */
+.quote{max-width:760px;margin:auto;text-align:center;padding:0 3rem}
+.quote p{font-size:clamp(1.2rem,2.5vw,1.65rem);font-family:'Space Grotesk';line-height:1.4}
+.quote img{width:56px;height:56px;border-radius:50%;filter:grayscale(1);margin-bottom:.8rem}
+
+/* pricing */
+.plan{border:1px solid #e2e5ea;border-radius:var(--r);padding:2rem;height:100%;transition:.3s;background:#fff}
+.plan:hover{transform:translateY(-6px)}
+.plan.pop{background:var(--ink);color:#fff;border-color:var(--ink);box-shadow:0 24px 48px -24px rgba(23,23,23,.7)}
+.plan .amt{font-family:'Space Grotesk';font-size:3rem;font-weight:700}
+.plan.pop .muted{color:var(--slate-l)}
+
+/* faq */
+.accordion{--bs-accordion-bg:transparent;--bs-accordion-color:#e2e8f0;--bs-accordion-border-color:var(--line);--bs-accordion-btn-color:#fff;--bs-accordion-active-bg:#222;--bs-accordion-active-color:#fff;--bs-accordion-btn-focus-box-shadow:none}
+.accordion-button{background:transparent;font-weight:700;font-family:'Space Grotesk'}
+.accordion-button::after{filter:invert(1)}
+
+/* forms */
+.form-control{border-radius:var(--r);padding:.8rem 1rem;border-color:#cfd5de}
+.form-control:focus{border-color:var(--ink);box-shadow:0 0 0 .2rem rgba(100,116,139,.25)}
+.dark .form-control{background:#222;border-color:#333;color:#fff}
+.dark .form-control::placeholder{color:#7a8699}
+.map{border:0;width:100%;height:100%;min-height:320px;filter:grayscale(1) contrast(1.1);border-radius:var(--r)}
+
+/* footer + floating */
+footer{background:var(--ink);color:var(--slate-l);padding:1.4rem 0;border-top:1px solid #2c2c2c}
+footer .soc a{display:inline-flex;width:34px;height:34px;align-items:center;justify-content:center;border:1px solid #333;border-radius:50%;margin-left:.4rem;transition:.25s;color:#cbd5e1}
+footer .soc a:hover{background:#fff;color:var(--ink);transform:translateY(-3px)}
+footer svg{width:15px;height:15px;fill:currentColor}
+#top{position:fixed;right:20px;bottom:20px;width:46px;height:46px;border-radius:50%;border:1px solid var(--slate);background:var(--ink);color:#fff;z-index:900;opacity:0;visibility:hidden;transition:.3s;transform:translateY(10px)}
+#top.show{opacity:1;visibility:visible;transform:none}
+#top:hover{background:#fff;color:var(--ink)}
+#cta{position:fixed;left:20px;bottom:20px;z-index:900;background:#fff;color:var(--ink);font-weight:700;padding:.75rem 1.3rem;border-radius:30px;text-decoration:none;box-shadow:0 10px 30px rgba(0,0,0,.35);transition:.3s;border:1px solid var(--ink)}
+#cta:hover{background:var(--ink);color:#fff}
+#cta::before{content:"";display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--slate);margin-right:.55rem;animation:pulse 1.8s infinite}
+@keyframes pulse{50%{box-shadow:0 0 0 7px rgba(100,116,139,0)}0%{box-shadow:0 0 0 0 rgba(100,116,139,.7)}}
+.offcanvas{background:var(--ink);color:#fff}
+.ci{display:flex;justify-content:space-between;border-bottom:1px solid #2c2c2c;padding:.7rem 0}
+.ci button{background:none;border:0;color:var(--slate-l)}
+
+/* reveal */
+.rv{opacity:0;transform:translateY(32px);transition:opacity .8s,transform .8s}
+.rv.in{opacity:1;transform:none}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important;scroll-behavior:auto!important}.rv{opacity:1;transform:none}}
+@media(max-width:767px){section{padding:72px 0}.quote{padding:0 2.2rem}#cta{left:12px;bottom:12px;padding:.6rem 1rem}}
+</style>
+</head>
+<body>
+
+<div id="pre" role="status"><div class="gauge"></div><small>AIRING DOWN THE TYRES</small></div>
+<div class="cur" id="cur"></div><div class="cur-dot" id="dot"></div>
+
+<nav class="navbar navbar-expand-lg fixed-top" id="nav">
+  <div class="container">
+    <a class="brand" href="#hero">Overdrive<i>Garage</i></a>
+    <button class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#menu" aria-label="Toggle menu"><span class="navbar-toggler-icon"></span></button>
+    <div class="collapse navbar-collapse" id="menu">
+      <ul class="navbar-nav mx-auto">
+        <li class="nav-item"><a class="nav-link" href="#shop">Shop</a></li>
+        <li class="nav-item"><a class="nav-link" href="#engineering">Trail-tested</a></li>
+        <li class="nav-item"><a class="nav-link" href="#gallery">Rigs</a></li>
+        <li class="nav-item"><a class="nav-link" href="#pricing">Trail Club</a></li>
+        <li class="nav-item"><a class="nav-link" href="#faq">FAQ</a></li>
+        <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
+      </ul>
+      <button class="cart-btn" data-bs-toggle="offcanvas" data-bs-target="#cart">Cart<span id="cn">0</span></button>
+    </div>
+  </div>
+</nav>
+
+<main>
+<section id="hero">
+  <canvas id="heroCanvas" aria-hidden="true"></canvas>
+  <div class="container">
+    <h1>Where the road ends, we begin.</h1>
+    <p class="mt-4 mb-4">Overdrive Garage: precision parts for peak performance, off the pavement. Lift kits, armour, winches, lighting and recovery gear, tested on real trails and shipped in 24 hours.</p>
+    <a href="#shop" class="btn btn-od me-2 mb-2">Shop trail gear</a>
+    <a href="#engineering" class="btn-ghost d-inline-block mb-2">See how we test</a>
+    <div class="rev" id="rev" aria-hidden="true"></div>
+  </div>
+</section>
+
+<section class="dark" style="padding:64px 0;border-bottom:1px solid #2c2c2c">
+  <div class="container"><div class="row g-4 text-start">
+    <div class="col-6 col-md-3 stat rv"><h3 data-n="9800">0</h3><span class="muted">rigs outfitted</span></div>
+    <div class="col-6 col-md-3 stat rv"><h3 data-n="1200">0</h3><span class="muted">parts in stock</span></div>
+    <div class="col-6 col-md-3 stat rv"><h3 data-n="140">0</h3><span class="muted">trail days a year</span></div>
+    <div class="col-6 col-md-3 stat rv"><h3 data-n="99" data-s="%">0</h3><span class="muted">fitment accuracy</span></div>
+  </div></div>
+</section>
+
+<section id="shop">
+  <div class="container">
+    <div class="row align-items-end mb-4 rv">
+      <div class="col-lg-7"><h2 class="display-5 fw-bold">Gear that survives the trail.</h2><p class="muted mb-0">Armour, suspension, recovery and lighting, chosen by people who actually wheel. Send your VIN and we'll confirm fitment before it ships.</p></div>
+      <div class="col-lg-5 filter text-lg-end mt-3 mt-lg-0">
+        <button class="btn on" data-f="all">All</button><button class="btn" data-f="suspension">Suspension</button><button class="btn" data-f="armour">Armour</button><button class="btn" data-f="recovery">Recovery</button><button class="btn" data-f="lighting">Lighting</button>
+      </div>
+    </div>
+    <div class="row g-4" id="grid"></div>
+  </div>
+</section>
+
+<section class="dark alt" id="engineering">
+  <div class="container">
+    <div class="row align-items-center g-5">
+      <div class="col-lg-6 rv"><div class="frame-wrap"><div class="depth r" data-speed="-.06"></div><div class="frame" data-speed=".04"><img src="images/trail-tested.jpg" alt="Lifted 4x4 climbing a rocky trail" loading="lazy"></div></div></div>
+      <div class="col-lg-6 rv"><h2 class="display-6 fw-bold">Proven on rock, mud and sand.</h2><p class="muted">Every product family spends a season on our test rigs: rock ledges, river crossings and dune runs. We log articulation, heat and wear, then publish the results so you can compare real numbers.</p>
+        <ul class="chk"><li>Articulation and ground clearance measured per kit</li><li>Salt-spray and 500-hour corrosion testing</li><li>Failed parts are torn down and documented</li></ul></div>
+    </div>
+  </div>
+</section>
+
+<section class="alt">
+  <div class="container">
+    <div class="row align-items-center g-5 flex-lg-row-reverse">
+      <div class="col-lg-6 rv"><div class="frame-wrap"><div class="depth l" data-speed="-.06"></div><div class="frame" data-speed=".04"><img src="images/armour.jpg" alt="Steel skid plate and rock slider underneath a truck" loading="lazy"></div></div></div>
+      <div class="col-lg-6 rv"><h2 class="display-6 fw-bold">Armour cut from 3 mm steel.</h2><p class="muted">Laser-cut, CNC-bent and powder-coated plate protects the oil pan, transfer case and rocker panels. Bolt-on mounting uses factory points, so there is no drilling and no welding.</p>
+        <ul class="chk"><li>Lifetime warranty on all armour</li><li>Powder-coat rated for 1,000-hour salt spray</li><li>Custom fabrication for rare chassis</li></ul>
+        <a href="#contact" class="btn btn-od mt-2">Request a custom plate</a></div>
+    </div>
+  </div>
+</section>
+
+<section class="dark alt" style="padding-top:0">
+  <div class="container">
+    <div class="row align-items-center g-5">
+      <div class="col-lg-6 rv"><div class="frame-wrap"><div class="depth r" data-speed="-.06"></div><div class="frame" data-speed=".04"><img src="images/recovery.jpg" alt="Winch recovery on a muddy trail at dusk" loading="lazy"></div></div></div>
+      <div class="col-lg-6 rv"><h2 class="display-6 fw-bold">Recover yourself, or the guy behind you.</h2><p class="muted">Pair a rated winch with the right straps, shackles and boards. Our recovery guides walk you through safe pulls, anchor points and kit checks before you leave the pavement.</p>
+        <ul class="chk"><li>Every strap and shackle rated and tagged</li><li>Free recovery-basics video course with any winch</li><li>Loaner gear for first-time members</li></ul></div>
+    </div>
+  </div>
+</section>
+
+<section id="gallery">
+  <div class="container">
+    <div class="rv mb-4"><h2 class="display-6 fw-bold">Rigs from the community.</h2><p class="muted">Tap any rig to see it full size.</p></div>
+    <div class="row g-3" id="galrow"></div>
+  </div>
+</section>
+
+<section class="dark" id="reviews">
+  <div class="container">
+    <h2 class="display-6 fw-bold text-center mb-5 rv">What wheelers say</h2>
+    <div id="car" class="carousel slide rv" data-bs-ride="carousel" data-bs-interval="6000">
+      <div class="carousel-inner">
+        <div class="carousel-item active"><div class="quote"><img src="images/avatar1.jpg" alt=""><p>The 2-inch lift and shocks gave me real articulation without wrecking the daily drive. Bolted on in an afternoon.</p><span class="muted">Marcus T., Tacoma TRD</span></div></div>
+        <div class="carousel-item"><div class="quote"><img src="images/avatar2.jpg" alt=""><p>Rock sliders took a hard hit on Hell's Revenge and just needed a touch-up. Worth every peso.</p><span class="muted">Dani R., Wrangler Rubicon</span></div></div>
+        <div class="carousel-item"><div class="quote"><img src="images/avatar3.jpg" alt=""><p>Winched out of a river bed with my kit and the guide they sent. Support picked up at 11pm when I had a question.</p><span class="muted">Jiro K., Land Cruiser 79</span></div></div>
+      </div>
+      <button class="carousel-control-prev" data-bs-target="#car" data-bs-slide="prev" aria-label="Previous"><span class="carousel-control-prev-icon"></span></button>
+      <button class="carousel-control-next" data-bs-target="#car" data-bs-slide="next" aria-label="Next"><span class="carousel-control-next-icon"></span></button>
+    </div>
+  </div>
+</section>
+
+<section id="pricing" style="background:var(--soft)">
+  <div class="container">
+    <div class="text-center mb-5 rv"><h2 class="display-6 fw-bold">Trail Club</h2><p class="muted">Pick a tier for discounts, free shipping and trail support.</p></div>
+    <div class="row g-4 align-items-stretch">
+      <div class="col-md-4 rv"><div class="plan"><h3 class="h4">Scout</h3><div class="amt">$0</div><p class="muted">Free forever</p><ul class="chk"><li>Restock and sale alerts</li><li>Free fitment check</li><li>Standard shipping rates</li></ul><a href="#contact" class="btn btn-od w-100">Join free</a></div></div>
+      <div class="col-md-4 rv"><div class="plan pop"><h3 class="h4">Expedition</h3><div class="amt">$19<small class="fs-6 muted">/mo</small></div><p class="muted">Most popular</p><ul class="chk"><li>10% off every order</li><li>Free shipping over $50</li><li>Trail map and route pack access</li></ul><a href="#contact" class="btn btn-light-od btn w-100 fw-bold" style="border-radius:6px;padding:.8rem">Start Expedition</a></div></div>
+      <div class="col-md-4 rv"><div class="plan"><h3 class="h4">Outfitter</h3><div class="amt">$79<small class="fs-6 muted">/mo</small></div><p class="muted">For shops and guides</p><ul class="chk"><li>20% off and trade pricing</li><li>Priority 24h dispatch</li><li>Dedicated engineer line</li></ul><a href="#contact" class="btn btn-od w-100">Talk to sales</a></div></div>
+    </div>
+  </div>
+</section>
+
+<section class="dark" id="faq">
+  <div class="container"><div class="row g-5">
+    <div class="col-lg-4 rv"><h2 class="display-6 fw-bold">Questions, answered.</h2><p class="muted">Can't find yours? Use the contact form below and a trail mechanic will reply.</p></div>
+    <div class="col-lg-8 rv">
+      <div class="accordion" id="acc">
+        <div class="accordion-item"><h3 class="accordion-header"><button class="accordion-button" data-bs-toggle="collapse" data-bs-target="#q1">Will this lift kit fit my truck?</button></h3><div id="q1" class="accordion-collapse collapse show" data-bs-parent="#acc"><div class="accordion-body">Send us your VIN and tyre size at checkout. We cross-check it against manufacturer data and confirm fitment by email before shipping.</div></div></div>
+        <div class="accordion-item"><h3 class="accordion-header"><button class="accordion-button collapsed" data-bs-toggle="collapse" data-bs-target="#q2">What is your return policy?</button></h3><div id="q2" class="accordion-collapse collapse" data-bs-parent="#acc"><div class="accordion-body">Unused parts in original packaging can be returned within 30 days. Installed or modified items are covered by warranty only.</div></div></div>
+        <div class="accordion-item"><h3 class="accordion-header"><button class="accordion-button collapsed" data-bs-toggle="collapse" data-bs-target="#q3">Is a lift kit legal for road use?</button></h3><div id="q3" class="accordion-collapse collapse" data-bs-parent="#acc"><div class="accordion-body">Height and lighting rules vary by region. Check your local regulations; our product pages list each kit's final ride height and light specifications.</div></div></div>
+        <div class="accordion-item"><h3 class="accordion-header"><button class="accordion-button collapsed" data-bs-toggle="collapse" data-bs-target="#q4">Do you ship internationally?</button></h3><div id="q4" class="accordion-collapse collapse" data-bs-parent="#acc"><div class="accordion-body">Yes, to over 40 countries. Express options arrive in 3–6 business days, with duties calculated at checkout.</div></div></div>
+      </div>
+    </div>
+  </div></div>
+</section>
+
+<section id="contact">
+  <div class="container"><div class="row g-5">
+    <div class="col-lg-6 rv">
+      <h2 class="display-6 fw-bold">Plan your build.</h2>
+      <p class="muted">Tell us what you drive and where you wheel. We'll recommend parts within one business day.</p>
+      <form id="cf" novalidate>
+        <div class="mb-3"><label class="form-label" for="nm">Name</label><input id="nm" class="form-control" required minlength="2" autocomplete="name"><div class="invalid-feedback">Enter your name (2+ characters).</div></div>
+        <div class="mb-3"><label class="form-label" for="em">Email</label><input id="em" type="email" class="form-control" required autocomplete="email"><div class="invalid-feedback">Enter a valid email address.</div></div>
+        <div class="mb-3"><label class="form-label" for="ms">Message</label><textarea id="ms" rows="4" class="form-control" required minlength="10"></textarea><div class="invalid-feedback">Tell us a little more (10+ characters).</div></div>
+        <button class="btn btn-od">Send message</button>
+        <div id="cfok" class="mt-3 fw-bold" hidden>Message sent. We'll reply within one business day.</div>
+      </form>
+    </div>
+    <div class="col-lg-6 rv"><iframe class="map" title="Overdrive Garage location" loading="lazy" referrerpolicy="no-referrer-when-downgrade" src="https://www.google.com/maps?q=Quezon+City,+Philippines&output=embed"></iframe></div>
+  </div></div>
+</section>
+
+<section class="dark" style="padding:64px 0">
+  <div class="container"><div class="row align-items-center g-4">
+    <div class="col-lg-6 rv"><h2 class="h3 fw-bold">Get trail reports and gear drops first.</h2><p class="muted mb-0">One email a month. Unsubscribe anytime.</p></div>
+    <div class="col-lg-6 rv">
+      <form id="nf" class="d-flex gap-2 flex-wrap" novalidate>
+        <div class="flex-grow-1"><input id="ne" type="email" class="form-control" placeholder="you@email.com" aria-label="Email address" required><div class="invalid-feedback">Enter a valid email address.</div></div>
+        <button class="btn btn-od align-self-start">Subscribe</button>
+      </form>
+      <div id="nok" class="mt-2" hidden>You're on the list. Check your inbox to confirm.</div>
+    </div>
+  </div></div>
+</section>
+</main>
+
+
+<footer>
+  <div class="container d-flex flex-wrap justify-content-between align-items-center gap-2">
+    <small>&copy; <span id="yr"></span> Overdrive Garage. All rights reserved.</small>
+    <div class="soc">
+      <a href="#" aria-label="Instagram"><svg viewBox="0 0 24 24"><path d="M7 2h10a5 5 0 0 1 5 5v10a5 5 0 0 1-5 5H7a5 5 0 0 1-5-5V7a5 5 0 0 1 5-5zm0 2a3 3 0 0 0-3 3v10a3 3 0 0 0 3 3h10a3 3 0 0 0 3-3V7a3 3 0 0 0-3-3H7zm5 3.5a4.5 4.5 0 1 1 0 9 4.5 4.5 0 0 1 0-9zm0 2a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5zM17.3 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/></svg></a>
+      <a href="#" aria-label="YouTube"><svg viewBox="0 0 24 24"><path d="M21.6 7.2a2.5 2.5 0 0 0-1.8-1.8C18.2 5 12 5 12 5s-6.2 0-7.8.4A2.5 2.5 0 0 0 2.4 7.2C2 8.8 2 12 2 12s0 3.2.4 4.8a2.5 2.5 0 0 0 1.8 1.8C5.8 19 12 19 12 19s6.2 0 7.8-.4a2.5 2.5 0 0 0 1.8-1.8c.4-1.6.4-4.8.4-4.8s0-3.2-.4-4.8zM10 15V9l5.2 3L10 15z"/></svg></a>
+      <a href="#" aria-label="X"><svg viewBox="0 0 24 24"><path d="M17.8 3h3L14.2 10.6 22 21h-6.1l-4.8-6.3L5.6 21h-3l7-8.1L2.2 3h6.2l4.3 5.7L17.8 3zm-1 16.2h1.7L7.4 4.7H5.6l11.2 14.5z"/></svg></a>
+      <a href="#" aria-label="Facebook"><svg viewBox="0 0 24 24"><path d="M14 8V6.5c0-.7.2-1 1.2-1H17V2h-2.8C11.2 2 10 3.7 10 6v2H8v3.5h2V22h4v-10.5h2.7L17 8h-3z"/></svg></a>
+    </div>
+  </div>
+</footer>
+
+<a href="#contact" id="cta">Free fitment check</a>
+<button id="top" aria-label="Back to top">&uarr;</button>
+
+<div class="offcanvas offcanvas-end" id="cart" tabindex="-1">
+  <div class="offcanvas-header"><h4 class="offcanvas-title">Your cart</h4><button class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"></button></div>
+  <div class="offcanvas-body d-flex flex-column"><div id="ci" class="flex-grow-1"><p class="muted">Your cart is empty. Add a part from the shop.</p></div>
+    <div class="d-flex justify-content-between fw-bold fs-5 py-3"><span>Total</span><span id="ct">$0</span></div>
+    <button class="btn btn-light-od btn fw-bold" id="co" style="border-radius:6px;padding:.8rem">Checkout</button></div>
+</div>
+
+<div class="modal fade" id="lb" tabindex="-1" aria-label="Image viewer">
+  <div class="modal-dialog modal-dialog-centered modal-xl"><div class="modal-content">
+    <button class="btn-close btn-close-white position-absolute top-0 end-0 m-3" style="z-index:5" data-bs-dismiss="modal" aria-label="Close"></button>
+    <img id="lbImg" class="img-fluid rounded" alt=""><div class="p-3" id="lbCap"></div>
+  </div></div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+(() => {
+  const $ = (s, c = document) => c.querySelector(s), $$ = (s, c = document) => [...c.querySelectorAll(s)];
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* data */
+  const products = [
+    {n:'2" Lift Kit with Shocks', c:'suspension', p:1290, t:'Monotube, 2.5" of lift'},
+    {n:'Adjustable Remote-Reservoir Shocks', c:'suspension', p:980, t:'Set of 4, 12-way rebound'},
+    {n:'Steel Rock Sliders', c:'armour', p:540, t:'3 mm plate, bolt-on'},
+    {n:'Skid Plate Set', c:'armour', p:460, t:'Engine and transfer case'},
+    {n:'12,000 lb Winch', c:'recovery', p:780, t:'Synthetic rope, IP68'},
+    {n:'Recovery Boards Kit', c:'recovery', p:189, t:'Pair, with straps and shackles'},
+    {n:'30" LED Light Bar', c:'lighting', p:320, t:'Combo beam, 14,000 lumens'},
+    {n:'Ditch Light Pods', c:'lighting', p:150, t:'Pair, amber and white'}
+  ];
+  const PIMG = ['part0-liftkit','part1-shocks','part2-sliders','part3-skidplate','part4-winch','part5-boards','part6-lightbar','part7-ditchlights'].map(n => n + '.jpg');
+  const fmt = n => '$' + n.toLocaleString();
+  const cart = [];
+
+  /* fallback tile when an image file is missing */
+  const ph = "data:image/svg+xml," + encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 4 3"><rect width="4" height="3" fill="#2a2d33"/><path d="M0 2.4l1.1-1 .9.7 1-1.1 1 1.2V3H0z" fill="#64748B" opacity=".5"/></svg>');
+  document.addEventListener('error', e => { const t = e.target; if (t.tagName === 'IMG' && t.src !== ph) t.src = ph; }, true);
+
+  /* preloader */
+  addEventListener('load', () => setTimeout(() => $('#pre').classList.add('done'), 700));
+  setTimeout(() => $('#pre').classList.add('done'), 3500);
+  $('#yr').textContent = new Date().getFullYear();
+
+  /* products */
+  const grid = $('#grid');
+  grid.innerHTML = products.map((p, i) => `
+    <div class="col-sm-6 col-lg-3 prodc rv" data-c="${p.c}"><article class="prod">
+      <div class="ph"><img src="images/${PIMG[i]}" alt="${p.n}" loading="lazy"></div>
+      <div class="bd"><span class="tag">${p.t}</span><h3 class="h6 fw-bold mt-1">${p.n}</h3>
+      <div class="d-flex justify-content-between align-items-center mt-auto pt-3"><span class="pr">${fmt(p.p)}</span><button class="btn btn-od btn-sm add" data-i="${i}">Add to cart</button></div></div>
+    </article></div>`).join('');
+  $$('.filter .btn').forEach(b => b.onclick = () => {
+    $$('.filter .btn').forEach(x => x.classList.remove('on')); b.classList.add('on');
+    $$('.prodc').forEach(c => c.hidden = b.dataset.f !== 'all' && c.dataset.c !== b.dataset.f);
+  });
+  function renderCart() {
+    $('#cn').textContent = cart.length;
+    $('#ct').textContent = fmt(cart.reduce((s, i) => s + i.p, 0));
+    $('#ci').innerHTML = cart.length ? cart.map((it, k) => `<div class="ci"><span>${it.n}<br><small class="muted">${fmt(it.p)}</small></span><button data-k="${k}" aria-label="Remove ${it.n}">Remove</button></div>`).join('') : '<p class="muted">Your cart is empty. Add a part from the shop.</p>';
+  }
+  grid.addEventListener('click', e => {
+    const b = e.target.closest('.add'); if (!b) return;
+    cart.push(products[b.dataset.i]); renderCart();
+    b.textContent = 'Added'; setTimeout(() => b.textContent = 'Add to cart', 1200);
+  });
+  $('#ci').addEventListener('click', e => { const b = e.target.closest('[data-k]'); if (b) { cart.splice(b.dataset.k, 1); renderCart(); } });
+  $('#co').onclick = () => { if (cart.length) { cart.length = 0; renderCart(); $('#ci').innerHTML = '<p>Order received. A confirmation is on its way.</p>'; } };
+
+  /* gallery + lightbox */
+  const caps = ['Lifted Tacoma on 35s','Rubicon on the rocks','Land Cruiser river crossing','Rooftop-tent Defender','Dune-runner Raptor','Overland Hilux at sunrise'];
+  $('#galrow').innerHTML = caps.map((c, i) => `<div class="col-6 col-md-4 rv"><button class="gal" data-i="${i}" aria-label="Open ${c}"><img src="images/build${i}.jpg" alt="${c}" loading="lazy"></button></div>`).join('');
+  const lb = new bootstrap.Modal('#lb');
+  $('#galrow').addEventListener('click', e => {
+    const b = e.target.closest('.gal'); if (!b) return;
+    const i = b.dataset.i; $('#lbImg').src = `images/build${i}.jpg`; $('#lbImg').alt = caps[i]; $('#lbCap').textContent = caps[i]; lb.show();
+  });
+
+  /* forms */
+  const emailOk = v => /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v);
+  const check = f => { let ok = true; $$('input,textarea', f).forEach(i => { const v = i.value.trim(); const good = i.type === 'email' ? emailOk(v) : v.length >= (+i.minLength || 1); i.classList.toggle('is-invalid', !good); i.classList.toggle('is-valid', good); if (!good) ok = false; }); return ok; };
+  $('#cf').addEventListener('submit', e => { e.preventDefault(); if (check(e.target)) { e.target.reset(); $$('.is-valid', e.target).forEach(i => i.classList.remove('is-valid')); $('#cfok').hidden = false; } else $('#cfok').hidden = true; });
+  $('#nf').addEventListener('submit', e => { e.preventDefault(); if (check(e.target)) { e.target.hidden = true; $('#nok').hidden = false; } });
+
+  /* nav state, back to top, parallax */
+  const links = $$('.nav-link'), secs = links.map(l => $(l.getAttribute('href')));
+  const par = $$('[data-speed]');
+  let tick = false;
+  function onScroll() {
+    const y = scrollY;
+    $('#nav').classList.toggle('shrink', y > 40);
+    $('#top').classList.toggle('show', y > 600);
+    secs.forEach((s, i) => { const r = s.getBoundingClientRect(); links[i].classList.toggle('active', r.top < 140 && r.bottom > 140); });
+    if (!reduce) par.forEach(el => { const r = el.parentElement.getBoundingClientRect(); const d = (r.top + r.height / 2 - innerHeight / 2); el.style.transform = `translateY(${d * el.dataset.speed * -1}px)`; });
+    hero.off = y * .35; tick = false;
+  }
+  addEventListener('scroll', () => { if (!tick) { tick = true; requestAnimationFrame(onScroll); } }, {passive: true});
+  $('#top').onclick = () => scrollTo({top: 0, behavior: 'smooth'});
+  $$('.nav-link').forEach(l => l.addEventListener('click', () => { const m = $('#menu'); if (m.classList.contains('show')) bootstrap.Collapse.getOrCreateInstance(m).hide(); }));
+
+  /* reveal + counters */
+  const io = new IntersectionObserver(es => es.forEach(en => { if (en.isIntersecting) { en.target.classList.add('in'); io.unobserve(en.target); } }), {threshold: .12});
+  $$('.rv').forEach(el => io.observe(el));
+  const cio = new IntersectionObserver(es => es.forEach(en => {
+    if (!en.isIntersecting) return; cio.unobserve(en.target);
+    const el = en.target, end = +el.dataset.n, s = el.dataset.s || '', t0 = performance.now();
+    (function step(t) { const p = Math.min((t - t0) / 1800, 1); el.textContent = Math.round(end * (1 - Math.pow(1 - p, 3))).toLocaleString() + s; if (p < 1) requestAnimationFrame(step); })(t0);
+  }), {threshold: .6});
+  $$('[data-n]').forEach(el => cio.observe(el));
+
+  /* custom cursor */
+  const cur = $('#cur'), dot = $('#dot');
+  if (matchMedia('(hover:hover)').matches) {
+    document.body.classList.add('cc');
+    let x = 0, y = 0, cx = 0, cy = 0;
+    addEventListener('mousemove', e => { x = e.clientX; y = e.clientY; cur.style.opacity = dot.style.opacity = 1; dot.style.transform = `translate(${x - 3}px,${y - 3}px)`; });
+    (function loop() { cx += (x - cx) * .18; cy += (y - cy) * .18; cur.style.transform = `translate(${cx - cur.offsetWidth / 2}px,${cy - cur.offsetHeight / 2}px)`; requestAnimationFrame(loop); })();
+    document.addEventListener('mouseover', e => cur.classList.toggle('big', !!e.target.closest('a,button,input,textarea,.gal')));
+  }
+
+  /* rev meter */
+  const rev = $('#rev'); rev.innerHTML = '<b></b>'.repeat(14);
+  const bars = $$('b', rev); let lvl = 0;
+
+  /* hero particles */
+  const cv = $('#heroCanvas'), cx2 = cv.getContext('2d'), hero = {off: 0};
+  let W, H, pts = [], mouse = {x: -999, y: -999};
+  function size() { const d = Math.min(devicePixelRatio || 1, 2); W = cv.clientWidth; H = cv.clientHeight; cv.width = W * d; cv.height = H * d; cx2.setTransform(d, 0, 0, d, 0, 0); const n = Math.min(110, Math.floor(W * H / 14000)); pts = Array.from({length: n}, () => ({x: Math.random() * W, y: Math.random() * H, vx: (Math.random() - .5) * .5, vy: (Math.random() - .5) * .5, z: Math.random() * .8 + .2})); }
+  size(); addEventListener('resize', size);
+  cv.parentElement.addEventListener('mousemove', e => { const r = cv.getBoundingClientRect(); mouse.x = e.clientX - r.left; mouse.y = e.clientY - r.top; });
+  cv.parentElement.addEventListener('mouseleave', () => mouse.x = mouse.y = -999);
+  function draw() {
+    cx2.clearRect(0, 0, W, H);
+    let near = 0;
+    pts.forEach(p => {
+      const dx = p.x - mouse.x, dy = p.y - mouse.y, d = Math.hypot(dx, dy);
+      if (d < 140) { p.vx += dx / d * .06; p.vy += dy / d * .06; near++; }
+      p.vx *= .985; p.vy *= .985; p.x += p.vx + p.z * .15; p.y += p.vy;
+      if (p.x > W) p.x = 0; if (p.x < 0) p.x = W; if (p.y > H) p.y = 0; if (p.y < 0) p.y = H;
+    });
+    for (let i = 0; i < pts.length; i++) {
+      const a = pts[i], ay = a.y - hero.off * a.z * .4;
+      for (let j = i + 1; j < pts.length; j++) {
+        const b = pts[j], by = b.y - hero.off * b.z * .4, d = Math.hypot(a.x - b.x, ay - by);
+        if (d < 120) { cx2.strokeStyle = `rgba(148,163,184,${(1 - d / 120) * .35})`; cx2.lineWidth = .6; cx2.beginPath(); cx2.moveTo(a.x, ay); cx2.lineTo(b.x, by); cx2.stroke(); }
+      }
+      cx2.fillStyle = `rgba(255,255,255,${.3 + a.z * .6})`; cx2.beginPath(); cx2.arc(a.x, ay, a.z * 2, 0, 7); cx2.fill();
+    }
+    const target = Math.min(14, Math.round(near * 1.4 + (mouse.x > 0 ? 3 : 1)));
+    lvl += (target - lvl) * .08; bars.forEach((b, i) => b.classList.toggle('on', i < Math.round(lvl)));
+    if (scrollY < innerHeight * 1.2 && !reduce) requestAnimationFrame(draw); else if (!reduce) setTimeout(() => requestAnimationFrame(draw), 200);
+  }
+  reduce ? draw() : requestAnimationFrame(draw);
+  onScroll();
+})();
+</script>
+</body>
+</html>
